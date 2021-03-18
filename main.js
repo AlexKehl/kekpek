@@ -43,7 +43,7 @@ async function main() {
 
   console.log(quPosts);
 }
-
+console.log("kekpek");
 // kek pek aliexpress
 
 main();
