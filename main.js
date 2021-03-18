@@ -1,0 +1,47 @@
+const axios = require("axios");
+
+const USERS_ENPOINT = "https://jsonplaceholder.typicode.com/users";
+const POSTS_ENPOINT = "https://jsonplaceholder.typicode.com/posts";
+
+async function getUsers() {
+  const response = await axios.get(USERS_ENPOINT);
+  return response.data;
+}
+
+async function getUserPosts(userId) {
+  const response = await axios.get(POSTS_ENPOINT);
+  const posts = response.data;
+  return posts.filter(function (post) {
+    const isPostFromUser = post.userId === userId;
+    return isPostFromUser;
+  });
+}
+
+function getLast(arr) {
+  return arr[arr.length - 1];
+}
+
+function hasQu(string) {
+  return /qu/.test(string);
+}
+
+function hasQuTitleBody(post) {
+  return hasQu(post.title) && hasQu(post.body);
+}
+
+function getQuPosts(posts) {
+  return posts.filter(hasQuTitleBody);
+}
+
+async function main() {
+  const users = await getUsers();
+  const lastUser = getLast(users);
+
+  const userPosts = await getUserPosts(lastUser.id);
+
+  const quPosts = getQuPosts(userPosts);
+
+  console.log(quPosts);
+}
+
+main();
