@@ -13,14 +13,16 @@ const MILIS_IN_WEEK =
   DAYS_IN_WEEK;
 const oneWeekAgoMilis = date - MILIS_IN_WEEK;
 const dataItemLastWeek = [];
-for (const date of dataitem.prices) {
+const otfiltroval = dataitem.prices.filter(isDataOfLastWeek);
+console.log(otfiltroval);
+/* for (const date of dataitem.prices) {
   const result = isDataOfLastWeek(date);
   if (result === true) {
     dataItemLastWeek.push(date);
     // dataitem.prices.push(arr);
   }
   //  dataItemLastWeek.push(arr);
-}
+}*/
 function isDataOfLastWeek(oneDataItem) {
   const todayMilis = date;
   const pastMilis = new Date(oneDataItem[0]).valueOf();
