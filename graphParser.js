@@ -13,26 +13,20 @@ const MILIS_IN_WEEK =
   DAYS_IN_WEEK;
 const oneWeekAgoMilis = date - MILIS_IN_WEEK;
 const dataItemLastWeek = [];
-const otfiltroval = dataitem.prices.filter(isDataOfLastWeek);
-console.log(otfiltroval);
-/* for (const date of dataitem.prices) {
-  const result = isDataOfLastWeek(date);
-  if (result === true) {
-    dataItemLastWeek.push(date);
-    // dataitem.prices.push(arr);
-  }
-  //  dataItemLastWeek.push(arr);
-}*/
+const lastWeekPrices = dataitem.prices.filter(isDataOfLastWeek);
 function isDataOfLastWeek(oneDataItem) {
   const todayMilis = date;
   const pastMilis = new Date(oneDataItem[0]).valueOf();
   return todayMilis - pastMilis < MILIS_IN_WEEK;
 }
-
-console.log(dataItemLastWeek);
-/*const oneDataItem = ["Mar 18 2021 01: +0", 26.461, "11"];
-console.log(isDataOfLastWeek(oneDataItem));
- const testDate = "Mar 30 2014 01: +0";
-const newDate = new Date(testDate).valueOf();
-console.log(newDate);
-*/
+const price = 0;
+const avgPriceArrSum = lastWeekPrices
+  .map((lastWeekPrice) => lastWeekPrice[1] * parseInt(lastWeekPrice[2]))
+  .reduce(function (acc, currentvalue) {
+    return acc + currentvalue;
+  });
+const lastWeekPricesCount = lastWeekPrices.reduce(function (acc, currentvalue) {
+  return acc + parseInt(currentvalue[2]);
+}, 0);
+const avgPriceTrue = avgPriceArrSum / lastWeekPricesCount;
+console.log(avgPriceTrue);
